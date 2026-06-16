@@ -14,11 +14,26 @@ function handleLogin() {
   }
   errorMsg.value = ''
   isLoading.value = true
-  // Mock login delay
-  setTimeout(() => {
+  
+  fetch('http://localhost:3000/api/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username: username.value, password: password.value })
+  })
+  .then(res => res.json().then(data => ({ status: res.status, ok: res.ok, data })))
+  .then(({ status, ok, data }) => {
+    if (!ok) {
+      errorMsg.value = data.error || '登录失败'
+    } else {
+      emit('login-success')
+    }
+  })
+  .catch(err => {
+    errorMsg.value = '网络错误，无法连接到服务器'
+  })
+  .finally(() => {
     isLoading.value = false
-    emit('login-success')
-  }, 1000)
+  })
 }
 </script>
 

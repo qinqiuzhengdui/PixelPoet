@@ -19,11 +19,26 @@ function handleRegister() {
   }
   errorMsg.value = ''
   isLoading.value = true
-  // Mock register delay
-  setTimeout(() => {
+  
+  fetch('http://localhost:3000/api/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username: username.value, password: password.value })
+  })
+  .then(res => res.json().then(data => ({ status: res.status, ok: res.ok, data })))
+  .then(({ status, ok, data }) => {
+    if (!ok) {
+      errorMsg.value = data.error || '注册失败'
+    } else {
+      emit('register-success')
+    }
+  })
+  .catch(err => {
+    errorMsg.value = '网络错误，无法连接到服务器'
+  })
+  .finally(() => {
     isLoading.value = false
-    emit('register-success')
-  }, 1000)
+  })
 }
 </script>
 
