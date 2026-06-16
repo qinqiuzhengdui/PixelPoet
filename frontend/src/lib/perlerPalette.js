@@ -1,4 +1,4 @@
-import colorSystemMapping from '../../../backend/resouce/perler-beads-master/src/app/colorSystemMapping.json'
+import colorSystemMapping from './colorSystemMapping.json'
 import { findClosestPaletteColor, hexToRgb } from './perlerPixelation.js'
 
 /** @typedef {'MARD'|'COCO'|'漫漫'|'盼盼'|'咪小窝'} ColorSystem */
