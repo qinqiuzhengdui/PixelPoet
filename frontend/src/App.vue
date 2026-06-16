@@ -1,5 +1,7 @@
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
+import Login from './components/Login.vue'
+import Register from './components/Register.vue'
 import * as THREE from 'three'
 import { VoxelEngine } from './lib/VoxelEngine.js'
 import { TripoSRClient } from './lib/TripoSRClient.js'
@@ -11,6 +13,21 @@ import {
   pickMoodImageForProfit,
   pickStockMoodFromUpload
 } from './lib/stockMood.js'
+
+const isLoggedIn = ref(false)
+const currentAuthView = ref('login')
+
+function handleLoginSuccess() {
+  isLoggedIn.value = true
+}
+
+function switchToRegister() {
+  currentAuthView.value = 'register'
+}
+
+function switchToLogin() {
+  currentAuthView.value = 'login'
+}
 
 const mode = ref('mood')
 const text = ref('')
@@ -557,7 +574,12 @@ const btnLabel = computed(() => {
 </script>
 
 <template>
-  <div class="page">
+  <template v-if="!isLoggedIn">
+    <Login v-if="currentAuthView === 'login'" @login-success="handleLoginSuccess" @go-register="switchToRegister" />
+    <Register v-if="currentAuthView === 'register'" @register-success="switchToLogin" @go-login="switchToLogin" />
+  </template>
+
+  <div v-else class="page">
     <header class="header">
       <h1>心情拼豆 / 图片拼豆 / 股票配图</h1>
       <p class="subtitle">
