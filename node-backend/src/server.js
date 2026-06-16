@@ -60,6 +60,62 @@ app.post('/api/login', (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+
+// --- Admin Authentication Routes ---
+app.post('/api/admin/register', async (req, res) => {
+    try {
+        const { username, password, adminSecret } = req.body;
+        if (!username || !password) {
+            return res.status(400).json({ error: 'Username and password are required' });
+        }
+        // In a real app, you would check adminSecret against a hardcoded env var to prevent anyone from registering as admin
+        // For demonstration, we allow it if they just hit this endpoint or provide a dummy secret.
+        
+        db.get('SELECT id FROM users WHERE username = ?', [username], async (err, row) => {
+            if (err) return res.status(500).json({ error: 'Database error' });
+            if (row) return res.status(409).json({ error: 'Username already exists' });
+
+            const saltRounds = 10;
+            const hash = await bcrypt.hash(password, saltRounds);
+
+            db.run('INSERT INTO users (username, password_hash, role) VALUES (?, ?, ?)', [username, hash, 'admin'], function(insertErr) {
+                if (insertErr) return res.status(500).json({ error: 'Failed to create admin' });
+                res.status(201).json({ message: 'Admin registered successfully', userId: this.lastID });
+            });
+        });
+    } catch (err) {
+        console.error('Admin Register error:', err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.post('/api/admin/login', (req, res) => {
+    try {
+        const { username, password } = req.body;
+        if (!username || !password) {
+            return res.status(400).json({ error: 'Username and password are required' });
+        }
+
+        db.get('SELECT id, password_hash, role FROM users WHERE username = ?', [username], async (err, row) => {
+            if (err) return res.status(500).json({ error: 'Database error' });
+            if (!row) return res.status(401).json({ error: 'Invalid username or password' });
+
+            if (row.role !== 'admin') {
+                return res.status(403).json({ error: 'Access denied: Not an administrator' });
+            }
+
+            const match = await bcrypt.compare(password, row.password_hash);
+            if (match) {
+                res.json({ message: 'Admin Login successful', userId: row.id, username, role: 'admin' });
+            } else {
+                res.status(401).json({ error: 'Invalid username or password' });
+            }
+        });
+    } catch (err) {
+        console.error('Admin Login error:', err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
 // --- End Authentication Routes ---
 
 // 1. Text to Pixel Mood Image

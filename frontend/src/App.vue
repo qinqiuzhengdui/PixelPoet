@@ -1,7 +1,8 @@
-<script setup>
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import Login from './components/Login.vue'
 import Register from './components/Register.vue'
+import AdminLogin from './components/AdminLogin.vue'
+import AdminRegister from './components/AdminRegister.vue'
 import * as THREE from 'three'
 import { VoxelEngine } from './lib/VoxelEngine.js'
 import { TripoSRClient } from './lib/TripoSRClient.js'
@@ -15,9 +16,15 @@ import {
 } from './lib/stockMood.js'
 
 const isLoggedIn = ref(false)
+const isAdminLoggedIn = ref(false)
 const currentAuthView = ref('login')
 
 function handleLoginSuccess() {
+  isLoggedIn.value = true
+}
+
+function handleAdminLoginSuccess() {
+  isAdminLoggedIn.value = true
   isLoggedIn.value = true
 }
 
@@ -27,6 +34,14 @@ function switchToRegister() {
 
 function switchToLogin() {
   currentAuthView.value = 'login'
+}
+
+function switchToAdminLogin() {
+  currentAuthView.value = 'admin-login'
+}
+
+function switchToAdminRegister() {
+  currentAuthView.value = 'admin-register'
 }
 
 const mode = ref('mood')
@@ -575,13 +590,15 @@ const btnLabel = computed(() => {
 
 <template>
   <template v-if="!isLoggedIn">
-    <Login v-if="currentAuthView === 'login'" @login-success="handleLoginSuccess" @go-register="switchToRegister" />
+    <Login v-if="currentAuthView === 'login'" @login-success="handleLoginSuccess" @go-register="switchToRegister" @go-admin-login="switchToAdminLogin" />
     <Register v-if="currentAuthView === 'register'" @register-success="switchToLogin" @go-login="switchToLogin" />
+    <AdminLogin v-if="currentAuthView === 'admin-login'" @admin-login-success="handleAdminLoginSuccess" @go-admin-register="switchToAdminRegister" @go-user-login="switchToLogin" />
+    <AdminRegister v-if="currentAuthView === 'admin-register'" @admin-register-success="switchToAdminLogin" @go-admin-login="switchToAdminLogin" />
   </template>
 
   <div v-else class="page">
     <header class="header">
-      <h1>心情拼豆 / 图片拼豆 / 股票配图</h1>
+      <h1>{{ isAdminLoggedIn ? '✨ 尊享管理员控制台 ✨' : '心情拼豆 / 图片拼豆 / 股票配图' }}</h1>
       <p class="subtitle">
         文字生成 AI 图、上传图拼豆底稿，或上传股票「日收益」截图：根据 OCR 判断本月总体盈/亏，从本机素材库随机返回一张对应配图。
       </p>

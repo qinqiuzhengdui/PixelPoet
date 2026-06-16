@@ -19,6 +19,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 username TEXT UNIQUE NOT NULL,
                 password_hash TEXT NOT NULL,
+                role TEXT DEFAULT 'user',
                 created_at DATETIME DEFAULT CURRENT_TIMESTAMP
             )
         `, (createErr) => {
@@ -26,6 +27,10 @@ const db = new sqlite3.Database(dbPath, (err) => {
                 console.error('Error creating users table', createErr.message);
             } else {
                 console.log('Users table initialized successfully.');
+                // Attempt to add role column to existing databases (ignore error if it exists)
+                db.run(`ALTER TABLE users ADD COLUMN role TEXT DEFAULT 'user'`, () => {
+                    // Ignore errors (column already exists)
+                });
             }
         });
     }
