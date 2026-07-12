@@ -3,9 +3,9 @@
 这是一个基于大语言模型与极速图像处理算法的自动拼豆图纸生成系统。本项目包含前端交互界面、Node.js 网关以及基于 Moonbit 编写的高性能图像处理核心算法。
 
 ## 🔗 项目链接 (Project Links)
-*   **GitHub**: [qinqiuzhengdui/PixelPoet](https://github.com/qinqiuzhengdui/PixelPoet)
-*   **GitLink**: [aaabbb111/PixelPoet](https://gitlink.org.cn/aaabbb111/PixelPoet)
-*   **Mooncakes**: [PixelPoet/pixelate](https://mooncakes.io/docs/PixelPoet/pixelate/)
+*   **GitHub**: [https://github.com/qinqiuzhengdui/PixelPoet](https://github.com/qinqiuzhengdui/PixelPoet)
+*   **GitLink**: [https://gitlink.org.cn/aaabbb111/PixelPoet](https://gitlink.org.cn/aaabbb111/PixelPoet)
+*   **Mooncakes**: [https://mooncakes.io/docs/PixelPoet/pixelate/](https://mooncakes.io/docs/PixelPoet/pixelate/)
 
 ## 🎯 项目目标 (Project Goal)
 
