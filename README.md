@@ -5,7 +5,7 @@
 ## 🔗 项目链接 (Project Links)
 *   **GitHub**: [qinqiuzhengdui/PixelPoet](https://github.com/qinqiuzhengdui/PixelPoet)
 *   **GitLink**: [aaabbb111/PixelPoet](https://gitlink.org.cn/aaabbb111/PixelPoet)
-*   **Mooncakes**: [PixelPoet/pixelate](https://mooncakes.io/modules/PixelPoet/pixelate)
+*   **Mooncakes**: [PixelPoet/pixelate](https://mooncakes.io/docs/PixelPoet/pixelate/)
 
 ## 🎯 项目目标 (Project Goal)
 
