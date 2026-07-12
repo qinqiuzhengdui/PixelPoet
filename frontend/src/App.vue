@@ -1,3 +1,4 @@
+<script setup>
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import Login from './components/Login.vue'
 import Register from './components/Register.vue'
