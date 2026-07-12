@@ -3,6 +3,7 @@
 // alpha compositing, gamma correction, and palette organization.
 
 // Linear interpolation between two double values
+
 ///|
 fn lerp_double(a : Double, b : Double, t : Double) -> Double {
   a + (b - a) * t
