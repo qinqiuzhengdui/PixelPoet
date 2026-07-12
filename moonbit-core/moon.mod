@@ -1,9 +1,11 @@
-name = "hackathon/moodpixel"
+name = "PixelPoet/pixelate"
 
 version = "0.1.0"
 
 readme = "README.md"
 
-repository = ""
+repository = "https://github.com/qinqiuzhengdui/PixelPoet"
 
 license = "Apache-2.0"
+
+description = "Image pixelation and color quantization core for PixelPoet."
