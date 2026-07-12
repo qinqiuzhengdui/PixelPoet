@@ -1,10 +1,13 @@
+///|
 let target_colors = 128
 
+///|
 struct ColorBox {
-  colors: Array[Int]
+  colors : Array[Int]
 }
 
-fn bounding_volume(self: ColorBox) -> Int64 {
+///|
+fn ColorBox::bounding_volume(self : ColorBox) -> Int64 {
   let mut r_min = 256
   let mut r_max = -1
   let mut g_min = 256
@@ -16,12 +19,24 @@ fn bounding_volume(self: ColorBox) -> Int64 {
     let r = (c >> 16) & 0xFF
     let g = (c >> 8) & 0xFF
     let b = c & 0xFF
-    if r < r_min { r_min = r }
-    if r > r_max { r_max = r }
-    if g < g_min { g_min = g }
-    if g > g_max { g_max = g }
-    if b < b_min { b_min = b }
-    if b > b_max { b_max = b }
+    if r < r_min {
+      r_min = r
+    }
+    if r > r_max {
+      r_max = r
+    }
+    if g < g_min {
+      g_min = g
+    }
+    if g > g_max {
+      g_max = g
+    }
+    if b < b_min {
+      b_min = b
+    }
+    if b > b_max {
+      b_max = b
+    }
   }
   let dr = (r_max - r_min + 1).to_int64()
   let dg = (g_max - g_min + 1).to_int64()
@@ -29,7 +44,8 @@ fn bounding_volume(self: ColorBox) -> Int64 {
   dr * dg * db
 }
 
-fn split_by_median(self: ColorBox) -> Array[ColorBox] {
+///|
+fn ColorBox::split_by_median(self : ColorBox) -> Array[ColorBox] {
   let mut r_min = 256
   let mut r_max = -1
   let mut g_min = 256
@@ -41,21 +57,33 @@ fn split_by_median(self: ColorBox) -> Array[ColorBox] {
     let r = (c >> 16) & 0xFF
     let g = (c >> 8) & 0xFF
     let b = c & 0xFF
-    if r < r_min { r_min = r }
-    if r > r_max { r_max = r }
-    if g < g_min { g_min = g }
-    if g > g_max { g_max = g }
-    if b < b_min { b_min = b }
-    if b > b_max { b_max = b }
+    if r < r_min {
+      r_min = r
+    }
+    if r > r_max {
+      r_max = r
+    }
+    if g < g_min {
+      g_min = g
+    }
+    if g > g_max {
+      g_max = g
+    }
+    if b < b_min {
+      b_min = b
+    }
+    if b > b_max {
+      b_max = b
+    }
   }
   let dr = r_max - r_min
   let dg = g_max - g_min
   let db = b_max - b_min
-  
+
   if dr == 0 && dg == 0 && db == 0 {
     return []
   }
-  
+
   let mut axis = 0
   if dr >= dg && dr >= db {
     axis = 0
@@ -64,19 +92,31 @@ fn split_by_median(self: ColorBox) -> Array[ColorBox] {
   } else {
     axis = 2
   }
-  
+
   // Sort the colors based on the chosen axis
   self.colors.sort_by(fn(c1, c2) {
-    let v1 = if axis == 0 { (c1 >> 16) & 0xFF } else if axis == 1 { (c1 >> 8) & 0xFF } else { c1 & 0xFF }
-    let v2 = if axis == 0 { (c2 >> 16) & 0xFF } else if axis == 1 { (c2 >> 8) & 0xFF } else { c2 & 0xFF }
+    let v1 = if axis == 0 {
+      (c1 >> 16) & 0xFF
+    } else if axis == 1 {
+      (c1 >> 8) & 0xFF
+    } else {
+      c1 & 0xFF
+    }
+    let v2 = if axis == 0 {
+      (c2 >> 16) & 0xFF
+    } else if axis == 1 {
+      (c2 >> 8) & 0xFF
+    } else {
+      c2 & 0xFF
+    }
     v1 - v2
   })
-  
+
   let mid = self.colors.length() / 2
   if mid < 1 || mid >= self.colors.length() {
     return []
   }
-  
+
   let left = []
   let right = []
   for i = 0; i < mid; i = i + 1 {
@@ -85,11 +125,12 @@ fn split_by_median(self: ColorBox) -> Array[ColorBox] {
   for i = mid; i < self.colors.length(); i = i + 1 {
     right.push(self.colors[i])
   }
-  
+
   [{ colors: left }, { colors: right }]
 }
 
-fn average_rgb(self: ColorBox) -> Int {
+///|
+fn ColorBox::average_rgb(self : ColorBox) -> Int {
   let mut r : Int64 = 0
   let mut g : Int64 = 0
   let mut b : Int64 = 0
@@ -106,7 +147,8 @@ fn average_rgb(self: ColorBox) -> Int {
   (ri << 16) | (gi << 8) | bi
 }
 
-fn pick_widest_box(boxes: Array[ColorBox]) -> Int {
+///|
+fn pick_widest_box(boxes : Array[ColorBox]) -> Int {
   let mut best_idx = -1
   let mut best_vol : Int64 = -1
   for i = 0; i < boxes.length(); i = i + 1 {
@@ -122,17 +164,18 @@ fn pick_widest_box(boxes: Array[ColorBox]) -> Int {
   best_idx
 }
 
-pub fn build_palette(pixelsRgb24: Array[Int]) -> Array[Int] {
+///|
+pub fn build_palette(pixelsRgb24 : Array[Int]) -> Array[Int] {
   if pixelsRgb24.length() == 0 {
     return [0]
   }
-  
+
   let initial_colors = []
   for i = 0; i < pixelsRgb24.length(); i = i + 1 {
     initial_colors.push(pixelsRgb24[i])
   }
   let boxes = [{ colors: initial_colors }]
-  
+
   while boxes.length() < target_colors {
     let to_split_idx = pick_widest_box(boxes)
     if to_split_idx == -1 {
@@ -148,7 +191,7 @@ pub fn build_palette(pixelsRgb24: Array[Int]) -> Array[Int] {
     boxes.push(pair[0])
     boxes.push(pair[1])
   }
-  
+
   let palette = []
   for i = 0; i < boxes.length(); i = i + 1 {
     palette.push(boxes[i].average_rgb())
@@ -156,7 +199,8 @@ pub fn build_palette(pixelsRgb24: Array[Int]) -> Array[Int] {
   palette
 }
 
-fn rgb_distance_sq(a: Int, b: Int) -> Int {
+///|
+fn rgb_distance_sq(a : Int, b : Int) -> Int {
   let ar = (a >> 16) & 0xFF
   let ag = (a >> 8) & 0xFF
   let ab = a & 0xFF
@@ -169,8 +213,11 @@ fn rgb_distance_sq(a: Int, b: Int) -> Int {
   dr * dr + dg * dg + db * db
 }
 
-pub fn nearest_palette_color(rgb24: Int, palette: Array[Int]) -> Int {
-  if palette.length() == 0 { return rgb24 }
+///|
+pub fn nearest_palette_color(rgb24 : Int, palette : Array[Int]) -> Int {
+  if palette.length() == 0 {
+    return rgb24
+  }
   let mut best = palette[0]
   let mut best_d = 2147483647
   for i = 0; i < palette.length(); i = i + 1 {

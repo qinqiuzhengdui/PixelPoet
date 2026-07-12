@@ -1,0 +1,327 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "hackathon/moodpixel/pixelate"
+
+// Values
+pub fn apply_kernel(Bytes, Int, Int, Array[Double], Int, Double, Double) -> Bytes
+
+pub fn bicubic_resize(Bytes, Int, Int, Int, Int) -> Bytes
+
+pub fn bilinear_resize(Bytes, Int, Int, Int, Int) -> Bytes
+
+pub fn blend_rgb(RgbColor, RgbColor, Double) -> RgbColor
+
+pub fn blur_box(Bytes, Int, Int) -> Bytes
+
+pub fn blur_gaussian_3x3(Bytes, Int, Int) -> Bytes
+
+pub fn blur_gaussian_5x5(Bytes, Int, Int) -> Bytes
+
+pub fn build_palette(Array[Int]) -> Array[Int]
+
+pub fn cmyk_to_rgb(CmykColor) -> RgbColor
+
+pub fn complex_add(Complex, Complex) -> Complex
+
+pub fn complex_magnitude(Complex) -> Double
+
+pub fn complex_mul(Complex, Complex) -> Complex
+
+pub fn complex_sub(Complex, Complex) -> Complex
+
+pub fn composite_source_over(Int, Int, Int, Int, Int, Int, Int, Int) -> RgbColor
+
+pub fn count_beads(Array[Int]) -> Array[BeadStat]
+
+pub fn dct_2d(Array[Double], Int, Int) -> Array[Double]
+
+pub fn delta_e_00(LabColor, LabColor) -> Double
+
+pub fn delta_e_76(LabColor, LabColor) -> Double
+
+pub fn delta_e_94(LabColor, LabColor) -> Double
+
+pub fn dither_atkinson(Bytes, Int, Int, Array[Int]) -> Bytes
+
+pub fn dither_burkes(Bytes, Int, Int, Array[Int]) -> Bytes
+
+pub fn dither_floyd_steinberg(Bytes, Int, Int, Array[Int]) -> Bytes
+
+pub fn dither_ordered_bayer(Bytes, Int, Int, Array[Int], Int) -> Bytes
+
+pub fn dither_stucki(Bytes, Int, Int, Array[Int]) -> Bytes
+
+pub fn edge_detection_sobel(Bytes, Int, Int) -> Bytes
+
+pub fn export_csv(Array[Int], Int, Int) -> String
+
+pub fn export_html_report(Array[Int], Int, Int) -> String
+
+pub fn export_svg(Array[Int], Int, Int, Int) -> String
+
+pub fn fft_1d(Array[Complex], Bool) -> Array[Complex]
+
+pub fn fft_2d(Array[Complex], Int, Int, Bool) -> Array[Complex]
+
+pub fn filter_adjust_brightness(Bytes, Int) -> Bytes
+
+pub fn filter_adjust_contrast(Bytes, Double) -> Bytes
+
+pub fn filter_emboss(Bytes, Int, Int) -> Bytes
+
+pub fn filter_grayscale_average(Bytes) -> Bytes
+
+pub fn filter_grayscale_bt601(Bytes) -> Bytes
+
+pub fn filter_grayscale_luminance(Bytes) -> Bytes
+
+pub fn filter_invert(Bytes) -> Bytes
+
+pub fn filter_sepia(Bytes) -> Bytes
+
+pub fn filter_sharpen(Bytes, Int, Int) -> Bytes
+
+pub fn find_closest_brand_color(RgbColor, Array[BrandColor]) -> BrandColor
+
+pub fn gamma_correct_value(Double, Double) -> Double
+
+pub fn generate_svg_path(Array[Point]) -> String
+
+pub fn get_artkal_palette() -> Array[BrandColor]
+
+pub fn get_hama_palette() -> Array[BrandColor]
+
+pub fn get_perler_palette() -> Array[BrandColor]
+
+pub fn get_srgb_decoding_lut() -> Array[Double]
+
+pub fn get_srgb_encoding_lut() -> Array[Double]
+
+pub fn highpass_filter_fft(Array[Complex], Int, Int, Double) -> Array[Complex]
+
+pub fn hough_circles(Bytes, Int, Int, Int, Int, Int, Int) -> Array[HoughCircle]
+
+pub fn hough_lines(Bytes, Int, Int, Int, Int) -> Array[HoughLine]
+
+pub fn hsl_to_rgb(HslColor) -> RgbColor
+
+pub fn hsv_to_rgb(HsvColor) -> RgbColor
+
+pub fn idct_2d(Array[Double], Int, Int) -> Array[Double]
+
+pub fn kmeans_quantize(Array[Int], Int, Int) -> Array[Int]
+
+pub fn lab_to_lch(LabColor) -> LchColor
+
+pub fn lab_to_rgb(LabColor) -> RgbColor
+
+pub fn lab_to_xyz(LabColor) -> XyzColor
+
+pub fn lanczos_resize(Bytes, Int, Int, Int, Int, Int) -> Bytes
+
+pub fn lch_to_lab(LchColor) -> LabColor
+
+pub fn lowpass_filter_fft(Array[Complex], Int, Int, Double) -> Array[Complex]
+
+pub fn make_bytes(Int, (Int) -> Byte) -> Bytes
+
+pub fn make_identity(Int) -> Matrix
+
+pub fn make_matrix(Int, Int) -> Matrix
+
+pub fn make_random(Int64) -> LcgRandom
+
+pub fn matrix_add(Matrix, Matrix) -> Matrix?
+
+pub fn matrix_inverse_gauss_jordan(Matrix) -> Matrix?
+
+pub fn matrix_lu_decomposition(Matrix) -> LuResult?
+
+pub fn matrix_mul(Matrix, Matrix) -> Matrix?
+
+pub fn matrix_scale(Matrix, Double) -> Matrix
+
+pub fn matrix_sub(Matrix, Matrix) -> Matrix?
+
+pub fn matrix_transpose(Matrix) -> Matrix
+
+pub fn nearest_neighbor_resize(Bytes, Int, Int, Int, Int) -> Bytes
+
+pub fn nearest_palette_color(Int, Array[Int]) -> Int
+
+pub fn octree_quantize(Array[Int], Int) -> Array[Int]
+
+pub fn pixelate(Bytes, Int, Int, Int) -> Array[Int]
+
+pub fn point_dist(Point, Point) -> Double
+
+pub fn ramer_douglas_peucker(Array[Point], Double) -> Array[Point]
+
+pub fn rgb_to_cmyk(RgbColor) -> CmykColor
+
+pub fn rgb_to_hsl(RgbColor) -> HslColor
+
+pub fn rgb_to_hsv(RgbColor) -> HsvColor
+
+pub fn rgb_to_lab(RgbColor) -> LabColor
+
+pub fn rgb_to_xyz(RgbColor) -> XyzColor
+
+pub fn rgb_to_yuv(RgbColor) -> YuvColor
+
+pub fn run_pixelate_simulation_pipeline(Bytes, Int, Int, Int, String, Int, Bool, String, Bool, Int, Int) -> SimulationResult
+
+pub fn run_stress_simulation(Int) -> Bool
+
+pub fn sort_palette_by_brightness(Array[Int]) -> Array[Int]
+
+pub fn trace_contour_marching_squares(Array[Int], Int, Int, Int) -> Array[Contour]
+
+pub fn xyz_to_lab(XyzColor) -> LabColor
+
+pub fn xyz_to_rgb(XyzColor) -> RgbColor
+
+pub fn yuv_to_rgb(YuvColor) -> RgbColor
+
+// Errors
+
+// Types and methods
+type BeadStat
+
+pub struct BrandColor {
+  name : String
+  code : String
+  r : Int
+  g : Int
+  b : Int
+  l : Double
+  a : Double
+  b_val : Double
+}
+
+pub struct CmykColor {
+  c : Double
+  m : Double
+  y : Double
+  k : Double
+}
+
+type ColorBox
+
+pub struct Complex {
+  re : Double
+  im : Double
+}
+
+pub struct Contour {
+  points : Array[Point]
+}
+
+type ExporterStat
+
+pub struct HoughCircle {
+  cx : Int
+  cy : Int
+  radius : Int
+  votes : Int
+}
+
+pub struct HoughLine {
+  r : Double
+  theta : Double
+  votes : Int
+}
+
+pub struct HslColor {
+  h : Double
+  s : Double
+  l : Double
+}
+
+pub struct HsvColor {
+  h : Double
+  s : Double
+  v : Double
+}
+
+type IntMap
+
+type KCentroid
+
+pub struct LabColor {
+  l : Double
+  a : Double
+  b : Double
+}
+
+pub struct LcgRandom {
+  mut seed : Int64
+}
+pub fn LcgRandom::generate_random_rgba(Self, Int) -> Bytes
+pub fn LcgRandom::next_double(Self) -> Double
+pub fn LcgRandom::next_int(Self, Int, Int) -> Int
+
+pub struct LchColor {
+  l : Double
+  c : Double
+  h : Double
+}
+
+pub struct LuResult {
+  l : Matrix
+  u : Matrix
+  p : Array[Int]
+}
+
+pub struct Matrix {
+  rows : Int
+  cols : Int
+  data : Array[Double]
+}
+pub fn Matrix::matrix_get(Self, Int, Int) -> Double
+pub fn Matrix::matrix_set(Self, Int, Int, Double) -> Unit
+
+type OctreeNode
+
+type OctreeTracker
+
+pub struct Point {
+  x : Double
+  y : Double
+}
+
+pub struct RgbColor {
+  r : Double
+  g : Double
+  b : Double
+}
+
+pub struct SimulationResult {
+  original_width : Int
+  original_height : Int
+  block_size : Int
+  grid_width : Int
+  grid_height : Int
+  palette : Array[Int]
+  csv_data : String
+  svg_data : String
+  html_report : String
+  lines_detected : Array[HoughLine]
+  circles_detected : Array[HoughCircle]
+}
+
+pub struct XyzColor {
+  x : Double
+  y : Double
+  z : Double
+}
+
+pub struct YuvColor {
+  y : Double
+  u : Double
+  v : Double
+}
+
+// Type aliases
+
+// Traits
+
